@@ -12,15 +12,16 @@ class SaldoInicial {
 
        @Test
         void deveConfigurarSaldoInicialCorreto() {
-           DigitalWallet digitalWallet = new DigitalWallet("Mel", 0); 
+           DigitalWallet digitalWallet = new DigitalWallet("Mel", 0);  //
            assertEquals(0, digitalWallet.getBalance());
         }
 
         @ParameterizedTest
         @ValueSource(doubles={-24,-2,-48})
         void deveLancarExcecaoParaSaldoInicialNegativo(double balance) {
-            assertThrows(IllegalArgumentException.class, ()->{
-               DigitalWallet digitalWallet = new DigitalWallet("Mel", balance); 
-            });
+         
+         IllegalArgumentException exception = 
+         assertThrows(IllegalArgumentException.class, ()-> new DigitalWallet("Mel", balance));
+             assertEquals("Negative initial balance", exception.getMessage());
         }
     }
